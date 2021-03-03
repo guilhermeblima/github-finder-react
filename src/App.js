@@ -9,6 +9,8 @@ import Search from './components/users/Search';
 import User from './components/users/User';
 import Users from './components/users/Users';
 
+import GithubState from './context/github/GithubState'
+
 const App = () => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
@@ -56,31 +58,34 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Alert alert={alert}/>
-          <Switch>
-            <Route exact path='/' render={props => (
-              <Fragment>
-                <Search 
-                  searchUsers={searchUsers} 
-                  clearUsers={clearUsers} 
-                  showClearBtn={users.length > 0 ? true : false}
-                  setAlert={showAlert}/>
-                <Users loading={loading} users={users}/>
-              </Fragment>
-            )}/>
-            <Route exact path='/about' component={About}/>
-            <Route exact path='/user/:login' render={props => (
-              <User {...props} getUser={getUser} getUserRepos={getRepos} user={user} repos={repos} loading={loading}/>
-            )}/>
-          </Switch>
-          
+    <GithubState>
+
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Alert alert={alert}/>
+            <Switch>
+              <Route exact path='/' render={props => (
+                <Fragment>
+                  <Search 
+                    searchUsers={searchUsers} 
+                    clearUsers={clearUsers} 
+                    showClearBtn={users.length > 0 ? true : false}
+                    setAlert={showAlert}/>
+                  <Users loading={loading} users={users}/>
+                </Fragment>
+              )}/>
+              <Route exact path='/about' component={About}/>
+              <Route exact path='/user/:login' render={props => (
+                <User {...props} getUser={getUser} getUserRepos={getRepos} user={user} repos={repos} loading={loading}/>
+              )}/>
+            </Switch>
+            
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </GithubState>
   );
 };
 
