@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, {useState, Fragment} from 'react';
+import React, { Fragment} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
 import Alert from './components/layout/Alert';
