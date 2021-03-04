@@ -13,12 +13,9 @@ import AlertState from './context/alert/AlertState';
 import GithubState from './context/github/GithubState'
 
 const App = () => {
-  const [alert, setAlert] = useState(null);  
-
   return (
     <GithubState>
       <AlertState>
-
         <Router>
           <div className="App">
             <Navbar />
